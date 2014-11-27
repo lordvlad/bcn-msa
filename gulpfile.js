@@ -17,9 +17,6 @@ var sourcemaps = require('gulp-sourcemaps');
 var source = require('vinyl-source-stream');
 var WSS = require('ws').Server;
 
-var macros = './src/macros/';
-
-
 var bOpt = extend({}, watchify.args, {debug: true});
 var sOpt = {modules: ['es6-macros']};
 

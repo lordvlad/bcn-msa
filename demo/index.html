@@ -12,8 +12,12 @@
      data-alignment="https://teed.biocatnet.de/data/alignment/teed.SFID1.aln"
      ></div>
 
-<script src="msa.1.0.0.js"></script>
+<script src="bcn-msaview.1.0.0.js"></script>
 <script src="livereload.js"></script>
+<script>
+  Array.prototype.map.call(document.querySelectorAll('[data-bcn="msa"]'),
+                           MSAView.create.bind(null, null));
+</script>
 
 </body>
 </html>

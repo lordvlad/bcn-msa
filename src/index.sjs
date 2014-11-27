@@ -11,31 +11,15 @@ var request = require('./request')
 var floor = Math.floor.bind(Math);
 var ceil = Math.ceil.bind(Math);
 
-function minmaxval(mi, ma, val) {
-    if (val < mi) return mi;
-    if (val > ma) return ma;
+function minmaxval(min, max, val) {
+    if (typeof min !== 'undefined' && val < min) return min;
+    if (typeof max !== 'undefined' && val > max) return max;
     return val;
-}
-
-function slice(arr, a, b) {
-    return Array.prototype.slice.call(arr, a, b);
-}
-
-function $(q, r) {
-    return (r||document).querySelector(q);
-}
-
-function $$(q, r) {
-    if (q.constructor.name !== 'NodeList')
-        q = (r||document).querySelectorAll(q);
-
-    return slice(q);
 }
 
 /**
  * MultiSequenceAlignment Viewer class
  */
-
 
 class MSAView  {
 
@@ -49,6 +33,7 @@ class MSAView  {
      *     letterSpacing: {int}
      *     cursorColor: {string} like 'rgba(128, 128, 128, 0.2)'
      *     loadingText: {string}
+     *     colorScheme: {string} provided by biojs-util-colorschemes
      *
      * @constructor
      * @param {DOMNode} root
@@ -65,7 +50,7 @@ class MSAView  {
         options = extend({}, MSAView.defaultOptions, root.dataset, options);
 
         // create canvas if not present
-        if (!(canvas = $('canvas', root)))
+        if (!(canvas = root.querySelector('canvas')))
             root.appendChild(canvas = document.createElement('canvas'));
 
         if ('bcnMsaFullscreen' in options)
@@ -182,9 +167,9 @@ class MSAView  {
         if (!m) return;
 
         switch (e.which) {
-            case 1: m.left = true; break;
-            case 3: m.right = true; break;
-            case 2: m.middle = true; break;
+        case 1: m.left = true; break;
+        case 3: m.right = true; break;
+        case 2: m.middle = true; break;
         }
 
         if (m.middle)
@@ -202,9 +187,9 @@ class MSAView  {
             this.scrollPos.pan = null;
 
         switch (e.which) {
-            case 1: m.left = false; break;
-            case 3: m.right = false; break;
-            case 2: m.middle = false; break;
+        case 1: m.left = false; break;
+        case 3: m.right = false; break;
+        case 2: m.middle = false; break;
         }
 
 
@@ -404,4 +389,10 @@ MSAView.defaultOptions = {
 };
 
 
-$$('[data-bcn="msa"]').map(MSAView.create.bind(null, null));
+if (typeof define === 'function' && define.amd) {
+    // require.js module
+    define(MSAView);
+} else {
+    // Browser globals
+    window.MSAView = MSAView;
+}
