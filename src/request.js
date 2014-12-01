@@ -5,6 +5,7 @@ module.exports = function request(url, opt) {
         var req = new XMLHttpRequest();
 
         req.open(opt.method || 'GET', url, true);
+        req.overrideMimeType('text/plain');
 
         Object.keys(opt.headers || {}).forEach(function (k) {
             req.setRequestHeader(k, opt.headers[k]);

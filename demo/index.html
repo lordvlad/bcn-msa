@@ -9,14 +9,13 @@
 
 <div data-bcn="msa"
      data-bcn-msa-fullScreen
-     data-alignment="https://teed.biocatnet.de/data/alignment/teed.SFID1.aln"
+     data-alignment="https://teed.biocatnet.de/data/alignment/teed.SFID8.aln"
      ></div>
 
 <script src="bcn-msaview.1.0.0.js"></script>
 <script src="livereload.js"></script>
 <script>
-  Array.prototype.map.call(document.querySelectorAll('[data-bcn="msa"]'),
-                           MSAView.create.bind(null, null));
+  new MSAView(document.querySelector('[data-bcn="msa"]'));
 </script>
 
 </body>

@@ -30,8 +30,7 @@ gulp.task('dist', function () {
 
     var name = getBundleName();
 
-    return (browserify('./src/index.sjs', bOpt)
-            .transform('sweetify', sOpt)
+    return (browserify('./src/index.js', bOpt)
             .bundle()
             .on('error', gutil.log.bind(gutil, 'Browserify Error'))
             .pipe(source(name + '.js'))
@@ -65,8 +64,7 @@ gulp.task('watch', function () {
         });
     }
 
-    var bundler = (watchify(browserify('./src/index.sjs', bOpt)
-                            .transform('sweetify', sOpt))
+    var bundler = (watchify(browserify('./src/index.js', bOpt))
                    .on('update', rebundle));
 
     function rebundle() {
