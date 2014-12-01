@@ -48,17 +48,17 @@ function normalizeWheelSpeed(event) {
  * Create MutliSequenceAlignment Viewer
  * Options include
  *     font: {string} like '12px monospace'
- *     lineHeight: {int}
- *     labelWidth: {int}
- *     leftMargin: {int}
- *     letterSpacing: {int}
+ *     lineHeight: {number}
+ *     labelWidth: {number}
+ *     leftMargin: {number}
+ *     letterSpacing: {number}
  *     cursorColor: {string} like 'rgba(128, 128, 128, 0.2)'
  *     loadingText: {string}
  *     colorScheme: {string} provided by biojs-util-colorschemes
  *
  * @constructor
- * @param {DOMNode} root
- * @param {object}  options
+ * @param {object} root
+ * @param {object} opt
  */
 
 function MSAView (root, opt) {

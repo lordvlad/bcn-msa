@@ -60,13 +60,13 @@ function MSA(src) {
 }
 
 
-/** @prop {int} set the number of lines that should be cached at most */
+/** @prop {number} set the number of lines that should be cached at most */
 MSA.numCachedLines = 3000;
 
-/** @prop {int} set the number of lines to fetch eagerly */
+/** @prop {number} set the number of lines to fetch eagerly */
 MSA.numPrefetchLines = 1000;
 
-/** @prop {float} fraction at which to trigger prefetch */
+/** @prop {number} fraction at which to trigger prefetch */
 MSA.numPrefetchTrigger = 0.5;
 
 
@@ -74,12 +74,12 @@ MSA.numPrefetchTrigger = 0.5;
  * Fetch and calculate different aspects of the MSA.
  * Returns the promise of an object:
  *   {
- *     {int} size       The bytesize of the whole MSA file
- *     {int} width      The widht of the MSA, i.e. the line length
+ *     {number} size       The bytesize of the whole MSA file
+ *     {number} width      The widht of the MSA, i.e. the line length
  *                      of those lines actually containing sequences
- *     {int} offset     The byte offset to the first sequence
- *     {int} count      The number of sequences in the MSA
- *     {int} labelWidth The number of characters reserved for labels
+ *     {number} offset     The byte offset to the first sequence
+ *     {number} count      The number of sequences in the MSA
+ *     {number} labelWidth The number of characters reserved for labels
  *                      in front of the sequences
  *   }
  *
@@ -100,7 +100,7 @@ MSA.prototype.getSize = function () {
     // file size
     var headP = request(this.href, {method: 'HEAD'})
         .then(function (req){
-            return {size: parseInt(req.getResponseHeader('Content-Length'))};
+            return {size: parseInt(req.getResponseHeader('Content-Length'), 10)};
         });
 
     // get the first 10 kb to find out the line width, label width
@@ -201,7 +201,7 @@ MSA.prototype.getCount = function () {
  *   {string} sequence
  * }
  *
- * @param {int} l line to get, 0-indexed
+ * @param {number} l line to get, 0-indexed
  * @return {Promise}
  */
 
@@ -223,9 +223,9 @@ MSA.prototype.getLine = function (l) {
  *   {string} sequence
  * }
  *
- * @param {int} a              first line to get, 0-indexed
- * @param {int} [b]            last line to get, defaults to a
- * @param {bool} doNotPrefetch flag to supress prefetch
+ * @param {number} a              first line to get, 0-indexed
+ * @param {number} [b]            last line to get, defaults to a
+ * @param {boolean} [doNotPrefetch] flag to supress prefetch
  * @return {Promise}
  */
 
